@@ -9,7 +9,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 
 # ===================== НАСТРОЙКИ =====================
-BOT_TOKEN = "YOUR_BOT_TOKEN"           # токен от @BotFather
+BOT_TOKEN = "8708783496:AAE6zAMSROFFGofMqvVNgtFWhJQd2vBBok8"           # токен от @BotFather
 OPENROUTER_API_KEY = "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"  # ключ с openrouter.ai
 
 FALLBACK_MODELS = [
