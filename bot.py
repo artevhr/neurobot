@@ -14,11 +14,11 @@ BOT_TOKEN = os.environ["BOT_TOKEN"]
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
 
 FALLBACK_MODELS = [
-    "meta-llama/llama-3.1-8b-instruct:free",
-    "microsoft/phi-3-mini-128k-instruct:free",
-    "huggingfaceh4/zephyr-7b-beta:free",
-    "openchat/openchat-7b:free",
-    "gryphe/mythomist-7b:free",
+    "arcee-ai/arcee-trinity-mini",
+    "qwen/qwen3-next-80b-a3b-instruct:free",
+    "nvidia/nemotron-nano-9b-v2:free",
+    "nvidia/nemotron-nano-12b-v2-vl:free",
+    "qwen/qwen3-vl-30b-a3b-thinking:free",
 ]
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
