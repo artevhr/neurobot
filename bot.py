@@ -10,7 +10,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 # ===================== НАСТРОЙКИ =====================
 BOT_TOKEN = "8708783496:AAE6zAMSROFFGofMqvVNgtFWhJQd2vBBok8"           # токен от @BotFather
-OPENROUTER_API_KEY = "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"  # ключ с openrouter.ai
+OPENROUTER_API_KEY = "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"  # ключ с openrouter.ai
 
 FALLBACK_MODELS = [
     "google/gemma-3-4b-it:free",
