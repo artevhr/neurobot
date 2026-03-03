@@ -1,6 +1,7 @@
 import logging
 import asyncio
 import aiohttp
+import os
 from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import CommandStart, Command
@@ -9,8 +10,8 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 
 # ===================== НАСТРОЙКИ =====================
-BOT_TOKEN = "8708783496:AAE6zAMSROFFGofMqvVNgtFWhJQd2vBBok8"           # токен от @BotFather
-OPENROUTER_API_KEY = "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"  # ключ с openrouter.ai
+BOT_TOKEN = os.environ["BOT_TOKEN"]
+OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
 
 FALLBACK_MODELS = [
     "google/gemma-3-4b-it:free",
