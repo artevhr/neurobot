@@ -42,13 +42,13 @@ async def call_openrouter(prompt: str, system: str = "") -> str:
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://t.me/your_bot",
+        "HTTP-Referer": "https://railway.app",
         "X-Title": "TG Neural Bot",
     }
-    messages = []
-    if system:
-        messages.append({"role": "system", "content": system})
-    messages.append({"role": "user", "content": prompt})
+    
+    # Объединяем system + prompt в один запрос
+    full_prompt = f"{system}\n\n{prompt}" if system else prompt
+    messages = [{"role": "user", "content": full_prompt}]
 
     async with aiohttp.ClientSession() as session:
         for model in FALLBACK_MODELS:
@@ -62,7 +62,7 @@ async def call_openrouter(prompt: str, system: str = "") -> str:
                 logger.info(f"Trying model: {model}")
                 async with session.post(
                     OPENROUTER_URL, headers=headers, json=payload,
-                    timeout=aiohttp.ClientTimeout(total=30)
+                    timeout=aiohttp.ClientTimeout(total=45)
                 ) as resp:
                     if resp.status == 200:
                         data = await resp.json()
@@ -70,8 +70,12 @@ async def call_openrouter(prompt: str, system: str = "") -> str:
                         if text:
                             logger.info(f"OK: {model}")
                             return text
+                    elif resp.status == 429:
+                        logger.warning(f"{model} → 429 (лимит), пробую следующую...")
+                        await asyncio.sleep(2)
                     else:
-                        logger.warning(f"{model} → {resp.status}")
+                        body = await resp.text()
+                        logger.warning(f"{model} → {resp.status}: {body[:200]}")
             except asyncio.TimeoutError:
                 logger.warning(f"{model} timed out")
             except Exception as e:
